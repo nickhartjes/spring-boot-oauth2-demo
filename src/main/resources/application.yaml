@@ -1,7 +1,12 @@
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
 
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: https://{yourOktaDomain}.okta.com/oauth2/default/v1/keys
+          jwk-set-uri: http://localhost:8081/auth/realms/demo/protocol/openid-connect/certs

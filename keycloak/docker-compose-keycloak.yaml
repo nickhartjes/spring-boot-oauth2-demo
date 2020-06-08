@@ -1,0 +1,29 @@
+version: '3.2'
+
+services:
+  keycloak-demo-mysql:
+    image: mysql:8.0.20
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+  keycloak-demo:
+    image: jboss/keycloak:10.0.1
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: keycloak-demo-mysql
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      KEYCLOAK_IMPORT: /tmp/demo-realm.json
+      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+      #JDBC_PARAMS: "connectTimeout=30000"
+    ports:
+      - 8081:8080
+    volumes:
+      - ./demo-realm.json:/tmp/demo-realm.json
+    depends_on:
+      - keycloak-demo-mysql
