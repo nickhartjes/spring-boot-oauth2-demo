@@ -1,0 +1,7 @@
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://{yourOktaDomain}.okta.com/oauth2/default/v1/keys
